@@ -35,8 +35,8 @@ function changeAppType(item) {
     }
 }
 $("input[name=accountMode]").change(function(){
-   accountMode = $("input[name=accountMode]:checked").val();
-   console.debug(accountMode);
+    accountMode = $("input[name=accountMode]:checked").val();
+    console.debug(accountMode);
 });
 //选择应用类型
 function selectApp() {
@@ -98,6 +98,69 @@ function independentModeLogin() {
     loginInfo.userSig = $('#login_pwd').val();
     $('#login_dialog').modal('hide');
     webimLogin();
+}
+
+//点击登录按钮(独立模式)//密码登录
+function independentModeLoginduli() {
+    if ($("#login_account_duli").val().length == 0) {
+        alert('请输入手机号');
+        return;
+    }
+    if ($("#login_pwd_duli").val().length == 0) {
+        alert('请输入密码');
+        return;
+    }
+
+
+    loginInfo.identifier = $('#login_account_duli').val();
+    loginInfo.userSig = $('#login_pwd_duli').val();
+    $('#login_dialog_duli').modal('hide');
+    // $.ajax({
+    //     url:"http://www.higuhit.com:81/mgo-api/login/app_login",
+    //     contentType:"application/json",
+    //     type:"POST",
+    //     async:true,
+    //     cache:false,
+    //     dataType:"json",
+    //     data:{
+    //         mobile:18217281667,
+    //         password:123456
+    //     },
+    //         success:function(data,status){
+    //             alert("Data: " + data + "\nStatus: " + status);
+    //         }
+    //
+    // }
+    // );
+    var jsonPara = {
+        mobile:18217281667,
+        password:123456
+    }
+    $.ajax({
+        type: "POST",
+        url: "http://www.higuhit.com:81/mgo-api/login/app_login",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(jsonPara),
+        dataType: "json",
+        success: function (message) {
+            if (message > 0) {
+                alert("请求已提交！我们会尽快与您取得联系");
+            }
+        },
+        error: function (message) {
+            $("#request-process-patent").html("提交数据失败！");
+        }
+    });
+    // $.post("http://www.higuhit.com:81/mgo-api/login/app_login",
+    //     {
+    //         mobile:18217281667,
+    //         password:123456
+    //     },
+    //     function(data,status){
+    //         alert("Data: " + data + "\nStatus: " + status);
+    //     },"json");
+
+    // webimLogin();
 }
 
 //初始化demo
