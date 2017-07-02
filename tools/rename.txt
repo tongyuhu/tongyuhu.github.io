@@ -1,0 +1,6 @@
+rename 0001.png to pos-z.png
+rename 0002.png to neg-x.png
+rename 0003.png to neg-z.png
+rename 0004.png to pos-x.png
+rename 0005.png to neg-y.png
+rename 0006.png to pos-y.png
